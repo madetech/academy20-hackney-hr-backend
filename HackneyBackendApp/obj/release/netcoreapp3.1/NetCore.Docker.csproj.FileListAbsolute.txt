@@ -1,0 +1,12 @@
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/bin/release/netcoreapp3.1/NetCore.Docker.deps.json
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/bin/release/netcoreapp3.1/NetCore.Docker.runtimeconfig.json
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/bin/release/netcoreapp3.1/NetCore.Docker.runtimeconfig.dev.json
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/bin/release/netcoreapp3.1/NetCore.Docker.dll
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/bin/release/netcoreapp3.1/NetCore.Docker.pdb
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.csprojAssemblyReference.cache
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.AssemblyInfoInputs.cache
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.AssemblyInfo.cs
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.csproj.CoreCompileInputs.cache
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.dll
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.pdb
+/Users/chloe/MadeTechAcademy/hackney_hr/academy20-hackney-hr-backend/HackneyBackendApp/obj/release/netcoreapp3.1/NetCore.Docker.genruntimeconfig.cache
