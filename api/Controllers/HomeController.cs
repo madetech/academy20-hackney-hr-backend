@@ -20,7 +20,7 @@ namespace API.Controllers
             {
                 Status = "Up"
             };
-            _logger.LogInformation($"Status pinged: {responseObject.Status}");
+            _logger.LogInformation($"Status pinged: {responseObject}");
             return responseObject;
         }
     }
