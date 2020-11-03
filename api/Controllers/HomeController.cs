@@ -1,27 +1,21 @@
 using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+
 
 namespace API.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("")]
     public class HomeController : ControllerBase
     {
-        private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
+        // Get homepage
         [HttpGet]
-        public object Get()
+        public ActionResult<string> Get()
         {
-            var responseObject = new
-            {
-                Status = "Up"
-            };
-            _logger.LogInformation($"Status pinged: {responseObject.Status}");
-            return responseObject;
+            return "Welcome to our home page. Please log in.";
         }
     }
 }
