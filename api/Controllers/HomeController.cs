@@ -15,16 +15,7 @@ namespace API.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-<<<<<<< HEAD
-            var responseObject = new
-            {
-                Status = "Up"
-            };
-            _logger.LogInformation($"Status pinged: {responseObject}");
-            return responseObject;
-=======
             return "Welcome to our home page. Please log in.";
->>>>>>> api-controllers
         }
     }
 }
