@@ -4,16 +4,21 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-// namespace API.Controllers
-// {
-//     public class UserLoginController
-//     {
-//         [Route("api/[controller]")]
-//         [ApiController]
+namespace API.Controllers
+{
 
-//         public class UserLoginController : ControllerBase
-//         {
+    [Route("api/[controller]")]
+    [ApiController]
 
-//         }
-//     }
-// }
+    public class UserLoginController : ControllerBase
+    {
+
+        // POST request
+        [HttpPost]
+        public ActionResult<string> Post([FromBody] UserLogin user)
+        {
+            "Username": "username",
+            "Password": "password"
+        }
+    }
+}

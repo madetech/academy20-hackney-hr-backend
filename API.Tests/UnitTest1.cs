@@ -32,7 +32,6 @@ namespace tests
     }
 }
 
-<<<<<<< HEAD
 // public class WeatherForecastControllerTests: IClassFixture<WebApplicationFactory<Api.Startup>>
 // {
 //     readonly HttpClient _client { get; }
@@ -52,7 +51,3 @@ namespace tests
 //         forecast.Should().HaveCount(5);
 //     }
 // }
-=======
-
-
->>>>>>> api-controllers
