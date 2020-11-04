@@ -8,7 +8,7 @@ namespace API.Controllers
     {
         public static string Main()
         {
-            return File.ReadAllText("/Users/ben_dalton/Desktop/Github/academy2020/academy20-hackney-hr-backend/mock_data.json");
+            return File.ReadAllText("../mock_data.json");
         }
     }
 
