@@ -21,7 +21,6 @@ namespace API.Tests.IntegrationTests
         [Theory]
         [InlineData("api/Home")]
         [InlineData("api/UserDetails")]
-        //[InlineData("http://localhost:5002/api/userdetails")]
         public async Task Get_EndpointReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange
