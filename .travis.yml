@@ -5,7 +5,7 @@ mono: none
 install:
   - dotnet restore WebApi.sln
 script:
-  - dotnet build
+  - dotnet build API/api.csproj
   - dotnet test Tests/Tests.csproj
 
     
