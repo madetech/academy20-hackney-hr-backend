@@ -4,7 +4,7 @@ using Xunit;
 using System.Text;
 using API.Controllers;
 using System.Threading.Tasks;
-using System.Net.Http;
+using System.Net;
 using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace API.Tests.IntegrationTests
@@ -20,8 +20,8 @@ namespace API.Tests.IntegrationTests
 
         [Theory]
         [InlineData("api/Home")]
-        [InlineData("api/UserDetails")]
-        public async Task Get_EndpointReturnSuccessAndCorrectContentType(string url)
+        [InlineData("api/Employee")]
+        public async Task Get_EndpointReturnSuccess(string url)
         {
             // Arrange
             var client = _factory.CreateClient();
@@ -30,8 +30,8 @@ namespace API.Tests.IntegrationTests
             var response = await client.GetAsync(url);
 
             // Assert
-            response.EnsureSuccessStatusCode(); 
-            Assert.Equal("text/plain; charset=utf-8", response.Content.Headers.ContentType.ToString());
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        
         }
         
     }
