@@ -6,8 +6,13 @@ using API.Controllers;
 using System.Threading.Tasks;
 using System.Net.Http;
 
+// using NUnit.Framework;
+// using RestSharp;
+// using System.Net;
+
 // connection refused error when run
-namespace tests
+// #################### xUnit
+namespace API.Tests
 {
     public class UnitTests
     {
@@ -20,19 +25,54 @@ namespace tests
             // Act
             var apiResponse = await apiClient.GetAsync($"http://localhost:5001/api/home");
 
+            Assert.True(apiResponse.IsSuccessStatusCode);
+            
             var stringResponse = await apiResponse.Content.ReadAsStringAsync();
             
-
             // Assert
-            Assert.True(apiResponse.IsSuccessStatusCode);
-            // Assert.Equal("Welcome to our home page. Please log in.", stringResponse);
+            
+            Assert.Equal("Welcome to our home page. Please log in.", stringResponse);
 
 
         }
     }
 }
 
-<<<<<<< HEAD
+// ################# NUnit
+// namespace API.Tests
+// {
+//     [TestFixture]
+//     public class UnitTests
+//     {
+//         [Test]
+//         public void HomepageStatusCodeTest()
+//         {
+//             // arrange
+//             RestClient client = new RestClient("https://localhost:5002/api");
+//             RestRequest request = new RestRequest("userdetails", Method.GET);
+
+//             // act
+//             IRestResponse response = client.Execute(request);
+//             // assert
+//             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+//         }
+//     }
+// }
+
+
+
+
+
+
+// ############################
+   
+
+
+
+
+
+
+// #######################
 // public class WeatherForecastControllerTests: IClassFixture<WebApplicationFactory<Api.Startup>>
 // {
 //     readonly HttpClient _client { get; }
@@ -52,7 +92,5 @@ namespace tests
 //         forecast.Should().HaveCount(5);
 //     }
 // }
-=======
 
 
->>>>>>> api-controllers
