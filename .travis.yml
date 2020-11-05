@@ -3,9 +3,11 @@ dotnet: 3.1.403
 mono: none
 
 install:
-  - dotnet restore WebApi.sln
+  # - dotnet restore WebApi.sln
+  - dotnet restore API/api.csproj
 script:
-  - dotnet build API/api.csproj
+  # - dotnet build API/api.csproj
+  - dotnet build WebApi.sln
   - dotnet test Tests/Tests.csproj
 
     
@@ -17,6 +19,4 @@ deploy:
     on:
         repo: madetech/academy20-hackney-hr-backend
     skip_cleanup: 'true'
-
-# deploy
 
