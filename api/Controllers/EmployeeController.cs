@@ -40,6 +40,6 @@ namespace API.Controllers
                 Response.StatusCode = 404;
             }  
             return employee;
-        }
+        } 
     }
 }
