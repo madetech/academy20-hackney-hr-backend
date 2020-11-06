@@ -4,7 +4,6 @@ mono: none
 solution: WebApi.sln
 install:
   # - dotnet restore WebApi.sln
-  - cd Api
   - dotnet restore
   #- dotnet restore WebApi.sln
 script:
