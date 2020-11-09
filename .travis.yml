@@ -7,7 +7,7 @@ install:
   - dotnet restore
   #- dotnet restore WebApi.sln
 script:
-  # - dotnet build API/api.csproj
+  # - dotnet build Api/Api.csproj
   - dotnet build
   - dotnet test
 
