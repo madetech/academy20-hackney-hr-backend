@@ -25,7 +25,7 @@ namespace Api.Tests.IntegrationTests
         }
 
         [Fact]
-        public async Task GetEmployeeList()
+        public async Task GetOneEmployee()
         {
             // arrange
             
