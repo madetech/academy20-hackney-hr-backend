@@ -1,10 +1,10 @@
 using System;
-using API.Models;
+using Api.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-// namespace API.Controllers
+// namespace Api.Controllers
 // {
 //     public class UserLoginController
 //     {

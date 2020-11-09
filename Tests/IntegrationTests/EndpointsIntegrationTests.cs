@@ -2,18 +2,18 @@ using System;
 using System.Runtime.ExceptionServices;
 using Xunit;
 using System.Text;
-using API.Controllers;
+using Api.Controllers;
 using System.Threading.Tasks;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Testing;
 
-namespace API.Tests.IntegrationTests
+namespace Api.Tests.IntegrationTests
 {
     public class EndpointsIntegrationTests
-        : IClassFixture<WebApplicationFactory<API.Startup>>
+        : IClassFixture<WebApplicationFactory<Api.Startup>>
     {
-        private readonly WebApplicationFactory<API.Startup> _factory;
-        public EndpointsIntegrationTests(WebApplicationFactory<API.Startup> factory)
+        private readonly WebApplicationFactory<Api.Startup> _factory;
+        public EndpointsIntegrationTests(WebApplicationFactory<Api.Startup> factory)
         {
             _factory = factory;
         }

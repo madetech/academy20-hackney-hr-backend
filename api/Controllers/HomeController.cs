@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -5,10 +5,10 @@ using System.Net;
 // using System.Net.Http;  
 // using System.Web.Http;  
 // using System.Web.Mvc
-using API.Models; 
+using Api.Models; 
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace Api.Controllers
 {
     [Route("api/[controller]")]
     // [Route("api/[controller]")]
