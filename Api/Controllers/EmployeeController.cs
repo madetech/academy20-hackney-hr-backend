@@ -63,17 +63,26 @@ namespace Api.Controllers
                 result.contact_email = employee.contact_email;
             }
             return result;
-        }      
+        }
+
+        // [HttpPost]
+        // public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        // {
+        //     try
+        //     {
+        //         if (employee == null)
+        //             return BadRequest();
+
+        //         var createdEmployee = await employeeRepository.AddEmployee(employee);
+
+        //         return CreatedAtAction(nameof(GetEmployee),
+        //             new { id = createdEmployee.EmployeeId }, createdEmployee);
+        //     }
+        //     catch (Exception)
+        //     {
+        //         return StatusCode(StatusCodes.Status500InternalServerError,
+        //             "Error creating new employee record");
+        //     }
+        // }      
     }
 }
-
-
-            // if (result != null)
-            // {
-            //     result.first_name = employee.first_name;
-            //     result.last_name = employee.last_name;
-            //     result.job_title = employee.job_title;
-            //     result.contact_email = employee.contact_email;
-
-            //     return result;
-            // } 
