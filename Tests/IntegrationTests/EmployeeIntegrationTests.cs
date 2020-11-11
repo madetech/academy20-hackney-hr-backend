@@ -52,7 +52,7 @@ namespace Api.Tests.IntegrationTests
         }
 
         [Fact]
-        public async Task TestPutOneEmployeeDetails()
+        public async Task TestPutEmployeeDetails()
         {
             // Arrange
             var request = new
@@ -62,10 +62,16 @@ namespace Api.Tests.IntegrationTests
             };
 
             // Act
-            var response = await httpClient.PutAsync("api/employee/1", ContentHelper.GetStringContent(request));
+            var response1 = await httpClient.PutAsync("api/employee/1", ContentHelper.GetStringContent(request));
+            var response2 = await httpClient.PutAsync("api/employee/2", ContentHelper.GetStringContent(request));
+            var response3 = await httpClient.PutAsync("api/employee/3", ContentHelper.GetStringContent(request));
+            var response4 = await httpClient.PutAsync("api/employee/4", ContentHelper.GetStringContent(request));
 
             // Assert
-            response.EnsureSuccessStatusCode();
+            Assert.Equal(HttpStatusCode.OK, response1.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response2.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response3.StatusCode);
+            Assert.Equal(HttpStatusCode.OK, response4.StatusCode);
         }
     }
 } 
