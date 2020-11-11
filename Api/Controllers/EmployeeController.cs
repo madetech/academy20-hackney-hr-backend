@@ -2,16 +2,15 @@ using System;
 using System.Collections.Generic;  
 using System.Linq;  
 using System.Net;  
-// using System.Net.Http;  
-// using System.Web.Http;  
-// using System.Web.Mvc
 using Api.Models; 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    // [Route("api/[controller]")]
     [ApiController]
 
     public class EmployeeController : ControllerBase
@@ -31,15 +30,50 @@ namespace Api.Controllers
             return employees;
         } 
 
-        [HttpGet("{id}")]   
+        [HttpGet("{id:int}")]   
         public Employee GetEmployeeDetails(int id)
         {
-            var employee = employees.FirstOrDefault(e => e.id == id);
-            if (employee == null)  
+            var result = employees.FirstOrDefault(e => e.id == id);
+            if (result == null)  
             {  
                 Response.StatusCode = 404;
             }  
-            return employee;
+            return result;
         } 
+
+        [HttpPut("{id:int}")]
+        public Employee UpdateEmployee(int id, Employee employee)
+        {
+            var result = employees.FirstOrDefault(e => e.id == id);
+
+            if (employee.first_name != null)
+            {
+                result.first_name = employee.first_name;
+            }
+            if (employee.last_name != null)
+            {
+                result.last_name = employee.last_name;
+            }
+            if (employee.job_title != null)
+            {
+                result.job_title = employee.job_title;
+            }
+            if (employee.contact_email != null)
+            {
+                result.contact_email = employee.contact_email;
+            }
+            return result;
+        }      
     }
 }
+
+
+            // if (result != null)
+            // {
+            //     result.first_name = employee.first_name;
+            //     result.last_name = employee.last_name;
+            //     result.job_title = employee.job_title;
+            //     result.contact_email = employee.contact_email;
+
+            //     return result;
+            // } 
