@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace Api.Tests.IntegrationTests
 {
-    public class EndpointsIntegrationTests
+    public class StatusIntegrationTests
         : IClassFixture<WebApplicationFactory<Api.Startup>>
     {
         private readonly WebApplicationFactory<Api.Startup> _factory;
-        public EndpointsIntegrationTests(WebApplicationFactory<Api.Startup> factory)
+        public StatusIntegrationTests(WebApplicationFactory<Api.Startup> factory)
         {
             _factory = factory;
         }
@@ -21,6 +21,10 @@ namespace Api.Tests.IntegrationTests
         [Theory]
         [InlineData("api/Home")]
         [InlineData("api/Employee")]
+        [InlineData("api/Employee/1")]
+        [InlineData("api/Employee/2")]
+        [InlineData("api/Employee/3")]
+        [InlineData("api/Employee/4")]
         public async Task Get_EndpointReturnSuccess(string url)
         {
             // Arrange
