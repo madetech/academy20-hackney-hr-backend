@@ -10,6 +10,7 @@ using Xunit;
 using Api.Controllers;
 using Api.Models;
 using System;
+// using Newtonsoft.Json;
 
 
 namespace Api.Tests.IntegrationTests 
@@ -22,6 +23,12 @@ namespace Api.Tests.IntegrationTests
         public EmployeeIntegrationTests(WebApplicationFactory<Api.Startup> factory)
         {
             httpClient = factory.CreateClient();
+        }
+
+        public static class ContentHelper
+        {
+        public static StringContent GetStringContent(object obj)
+            => new StringContent(JsonSerializer.Serialize(obj), Encoding.Default, "application/json");
         }
 
         [Fact]
@@ -43,6 +50,22 @@ namespace Api.Tests.IntegrationTests
             Assert.Contains(terms, t => t.contact_email == "ben.dalton@madetech.com");
 
         }
+
+        [Fact]
+        public async Task TestPutOneEmployeeDetails()
+        {
+            // Arrange
+            var request = new
+            {
+                first_name = "Harry",
+                last_name = "Potter"
+            };
+
+            // Act
+            var response = await httpClient.PutAsync("api/employee/1", ContentHelper.GetStringContent(request));
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
     }
-    
 } 
