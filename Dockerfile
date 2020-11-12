@@ -4,7 +4,7 @@ COPY *.sln .
 
 # Copy csproj and restore as distinct layers
 COPY Api/*.csproj Api/
-# COPY Tests/*.csproj Tests/
+COPY Tests/*.csproj Tests/
 RUN dotnet restore
 
 # Copy everything else and build
