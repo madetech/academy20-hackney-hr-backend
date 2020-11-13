@@ -4,12 +4,14 @@ mono: none
 solution: WebApi.sln
 services: 
   - docker
-before_install:
-  - docker pull
-  - docker run
-  - docker ps -a
 install:
   - dotnet restore
 script:
   - dotnet build
   - dotnet test
+after_script:
+  - heroku container:login
+  - docker build . -t hackney-hr-backend -f Dockerfile
+  - heroku container:push -a hackney-hr-backend web
+  - heroku container:release -a hackney-hr-backend web
+  - heroku open
