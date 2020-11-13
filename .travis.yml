@@ -13,4 +13,13 @@ script:
 after_script:
   - docker build . -t hackney-hr-backend -f Dockerfile
 
+deploy:
+  provider: heroku
+  api_key:
+      secure: cXTU37QCNwOblYdktCsiXkijn1QkxKWz3egnAzEJd6UpyR4N/opKUr8MwMHR+vzXJ/Eu3QKKU7sOt7Zh4jB0htiSkHLoCDUg/11z52NL7rHVDL7zVLnkn0V6YgZf3UJQ8YqGYipj3h430/KcM1e49atMVbodPR6aWESP1ZivFnhv9UQiKMN3+GzCCph8+ZnuzUFac6ABKhWPIWAHeNMCliqq+7tUJBAViwhWHx8SjiDItuRtxIhj9Co8BOUAGaSSpblj71rRHRdvELqzM1zMsgtqQdB1GIMYoczD0kzK/XyVE9EEBWbF0FTI10ByB1EK+wzWHpjzMvi1JpTB7+3dhJkGFDtGmD4n4GMQKX5S2t86mJ/7yt8XuLbW+2+xsQ28P5Vr+JeQJdGaeLtse4u02nACtDdtIAgR1g+Y9XrOHoB6fIFzPx1wHgDY74NuIhTaHKIwCYRccSHuiKKf2VcWzNdN77ulsBydDZRAY/wkNcFxSDONfgqJ2m4aeEHJBWltSh4P+DzPVMqycCvYEXqaLcxdtxlGjvIp0Wv7e/r2qwjAsIyAPrUMAPD/41bIJEe8yuVbHipcwgvduyMsx3mUyqLIQbD5onZWtAG+JlzA61WvJ17A6YfzFdSFx/ifT1dxJa0uNib1uvWLhzwH0HEIT4/Tc72aYK9UYQSJoNBr7m8=
+  app: hackney-hr-backend
+  on:
+      repo: madetech/academy20-hackney-hr-backend
+  skip_cleanup: 'true' 
+
 
