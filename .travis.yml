@@ -10,7 +10,7 @@ script:
   - dotnet build
   - dotnet test
 after_script:
-  - heroku container:login
+  - docker login --username=_ --password=$(heroku auth:token) registry.heroku.com
   - docker build . -t hackney-hr-backend -f Dockerfile
   - heroku container:push -a hackney-hr-backend web
   - heroku container:release -a hackney-hr-backend web
