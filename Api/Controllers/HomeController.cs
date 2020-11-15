@@ -15,7 +15,7 @@ namespace Api.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return "Welcome to the London Lost Llama's home page! Please log in.";
+            return "Welcome to the TEST home page! Please log in.";
         }
     }
 }

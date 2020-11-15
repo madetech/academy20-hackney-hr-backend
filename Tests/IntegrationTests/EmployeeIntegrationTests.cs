@@ -44,7 +44,7 @@ namespace Api.Tests.IntegrationTests
 
             Assert.Equal(4, terms.Count);
             Assert.Contains(terms, t => t.id == 1);
-            Assert.Contains(terms, t => t.first_name == "Ben");
+            Assert.Contains(terms, t => t.first_name == "Benjamin");
             Assert.Contains(terms, t => t.last_name == "Dalton");
             Assert.Contains(terms, t => t.job_title == "Academy Software Engineer");
             Assert.Contains(terms, t => t.contact_email == "ben.dalton@madetech.com");
