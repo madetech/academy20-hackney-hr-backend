@@ -32,26 +32,6 @@ namespace Api.Tests.IntegrationTests
         }
 
         [Fact]
-        public async Task GetOneEmployee()
-        {
-            // arrange
-            
-            // act
-            var response = await httpClient.GetAsync("api/employee");
-            // assert
-            var stringResponse = await response.Content.ReadAsStringAsync();
-            var terms = JsonSerializer.Deserialize<List<Employee>>(stringResponse, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
-            Assert.Equal(4, terms.Count);
-            Assert.Contains(terms, t => t.id == 1);
-            Assert.Contains(terms, t => t.first_name == "Ben");
-            Assert.Contains(terms, t => t.last_name == "Dalton");
-            Assert.Contains(terms, t => t.job_title == "Academy Software Engineer");
-            Assert.Contains(terms, t => t.contact_email == "ben.dalton@madetech.com");
-
-        }
-
-        [Fact]
         public async Task TestPutEmployeeDetails()
         {
             // Arrange
