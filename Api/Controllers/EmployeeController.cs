@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;  
 using System.Net;  
 using Api.Models; 
+using Api.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
@@ -24,10 +25,16 @@ namespace Api.Controllers
                 new Employee() { id = 4, first_name = "Chloe", last_name = "Wong", job_title = "Academy Software Engineer", contact_email = "chloe.wong@madetech.com" }
             };
 
-        [HttpGet]
-        public IList < Employee > GetAllEmployees()
+        private DataContext _context = null;
+        public EmployeeController(DataContext context)
         {
-            return employees;
+            _context = context;
+        }
+
+        [HttpGet]
+        public ActionResult GetAllEmployees()
+        {
+            return Ok(_context.Employees.ToList());
         } 
 
         [HttpGet("{id:int}")]   
