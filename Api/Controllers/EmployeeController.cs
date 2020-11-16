@@ -16,14 +16,7 @@ namespace Api.Controllers
 
     public class EmployeeController : ControllerBase
     {
-        
-        IList < Employee > employees = new List < Employee > ()
-            {
-                new Employee() { id = 1, first_name = "Ben", last_name = "Dalton", job_title = "Academy Software Engineer", contact_email = "ben.dalton@madetech.com" },
-                new Employee() { id = 2, first_name = "Bella", last_name = "Cockrell", job_title = "Academy Software Engineer", contact_email = "bella.cockrell@madetech.com" },
-                new Employee() { id = 3, first_name = "Derek", last_name = "Baker", job_title = "Academy Software Engineer", contact_email = "derek.baker@madetech.com" },
-                new Employee() { id = 4, first_name = "Chloe", last_name = "Wong", job_title = "Academy Software Engineer", contact_email = "chloe.wong@madetech.com" }
-            };
+    
 
         private DataContext _context = null;
         public EmployeeController(DataContext context)
@@ -33,13 +26,14 @@ namespace Api.Controllers
 
         [HttpGet]
         public ActionResult GetAllEmployees()
-        {
+        {   
             return Ok(_context.Employees.ToList());
         } 
 
         [HttpGet("{id:int}")]   
         public Employee GetEmployeeDetails(int id)
         {
+            var employees = _context.Employees.ToList();
             var result = employees.FirstOrDefault(e => e.id == id);
             if (result == null)  
             {  
@@ -51,6 +45,7 @@ namespace Api.Controllers
         [HttpPut("{id:int}")]
         public Employee UpdateEmployee(int id, Employee employee)
         {
+            var employees = _context.Employees.ToList();
             var result = employees.FirstOrDefault(e => e.id == id);
 
             if (employee.first_name != null)
