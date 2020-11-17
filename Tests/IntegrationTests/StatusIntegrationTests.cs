@@ -20,11 +20,11 @@ namespace Api.Tests.IntegrationTests
 
         [Theory]
         [InlineData("api/Home")]
-        [InlineData("api/Employee")]
-        [InlineData("api/Employee/1")]
-        [InlineData("api/Employee/2")]
-        [InlineData("api/Employee/3")]
-        [InlineData("api/Employee/4")]
+        // [InlineData("api/Employee")]
+        // [InlineData("api/Employee/1")]
+        // [InlineData("api/Employee/2")]
+        // [InlineData("api/Employee/3")]
+        // [InlineData("api/Employee/4")]
         public async Task Get_EndpointReturnSuccess(string url)
         {
             // Arrange
