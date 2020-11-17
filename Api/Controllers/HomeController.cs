@@ -15,7 +15,7 @@ namespace Api.Controllers
         [HttpGet]
         public ActionResult<string> Get()
         {
-            return "Welcome to the Hackney Council HR home page! Please log in.";
+            return "Welcome to the LLL home page! Please log in.";
         }
     }
 }
