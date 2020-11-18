@@ -30,9 +30,7 @@ namespace Api.Controllers
         public ActionResult GetAllEmployees() //IEnumerable<Employee> ActionResult
         {   
 
-            {   
-            try 
-            {
+            try {
                 
                 Console.WriteLine("INFO: List employees request received.");
                 var employees = _context.Employees.ToList();
@@ -40,9 +38,7 @@ namespace Api.Controllers
                 Console.WriteLine("INFO: Listed employees successfully.");
                 return Ok(employees);
         
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     $"Error retrieving data from the database: {e.Message}");
             }
@@ -59,7 +55,6 @@ namespace Api.Controllers
             //     return employees; //Ok(employees)
                 //return context.employees
 
-        }
             // var a = try{
             // Console.WriteLine("INFO: List employees request recieved.");
             //     var employees = _context.Employees.ToList();
