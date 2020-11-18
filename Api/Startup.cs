@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Api.Data;
+using Npgsql;
 
 namespace Api
 {
@@ -49,9 +50,12 @@ namespace Api
                 var pgPort = pgHostPort.Split(":")[1];
                 // connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require;";
                 connStr = $"Host={pgHost};Port={pgPort};Username={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require;";
+                
+                var builder = new NpgsqlConnectionStringBuilder(connStr);
 
                 Console.WriteLine(connStr);
-                options.UseNpgsql(connStr);
+                Console.WriteLine(builder.ConnectionString);
+                options.UseNpgsql(builder.ConnectionString);
             });
 
             services.AddControllers();
