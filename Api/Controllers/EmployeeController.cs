@@ -7,7 +7,8 @@ using Api.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-
+using System.Threading;
+using Microsoft.AspNetCore.Cors;
 
 namespace Api.Controllers
 {
@@ -24,9 +25,12 @@ namespace Api.Controllers
             _context = context;
         }
 
+        [EnableCors]
         [HttpGet]
-        public ActionResult GetAllEmployees()
+        public ActionResult GetAllEmployees() //IEnumerable<Employee> ActionResult
         {   
+
+            {   
             try 
             {
                 
@@ -43,23 +47,37 @@ namespace Api.Controllers
                     $"Error retrieving data from the database: {e.Message}");
             }
         }
+            // .toListAsync get this working
+
+            //     Console.WriteLine("INFO: List employees request received.");
+            //     var employees = _context.Employees.Select(e => {
+            //         Thread.Sleep(2000);
+            //         return e;
+            //     });
+        
+            //     Console.WriteLine("INFO: Listed employees successfully.");
+            //     return employees; //Ok(employees)
+                //return context.employees
+
+        }
+            // var a = try{
+            // Console.WriteLine("INFO: List employees request recieved.");
+            //     var employees = _context.Employees.ToList();
+            //     Console.WriteLine("INFO: Listed employees successfully.");
+
+
+            // } except err{
+            // Console.WriteLine("ERROR: Failed to list employees:{err.message}");
+            // }
         
             
             // return Ok(_context.Employees.ToList();)
         
-        //     var a = try{
-        //     Console.WriteLine("INFO: List employees request recieved.");
-        //         var employees = _context.Employees.ToList();
-        //         Console.WriteLine("INFO: Listed employees successfully.");
-
-
-        //     } except err{
-        //     Console.WriteLine("ERROR: Failed to list employees:{err.message}");
-        //     }
 
         //     return Ok(
         // } 
-
+        
+        [EnableCors]
         [HttpGet("{id:int}")]   
         public Employee GetEmployeeDetails(int id)
         {

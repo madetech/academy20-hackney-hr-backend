@@ -17,6 +17,7 @@ namespace Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +29,12 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(p=>p.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                builder => {
+                    builder.WithOrigins("http://localhost:3000");
+                });
+            });
             // var server = Environment.GetEnvironmentVariable("DATABASE_URL"); 
             // Console.WriteLine(server);
 
@@ -68,6 +75,7 @@ namespace Api
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
