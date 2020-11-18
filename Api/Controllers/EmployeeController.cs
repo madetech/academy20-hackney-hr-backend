@@ -27,8 +27,38 @@ namespace Api.Controllers
         [HttpGet]
         public ActionResult GetAllEmployees()
         {   
-            return Ok(_context.Employees.ToList());
-        } 
+            try 
+            {
+                
+                Console.WriteLine("INFO: List employees request received.");
+                var employees = _context.Employees.ToList();
+        
+                Console.WriteLine("INFO: Listed employees successfully.");
+                return Ok(employees);
+        
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    $"Error retrieving data from the database: {e.Message}");
+            }
+        }
+        
+            
+            // return Ok(_context.Employees.ToList();)
+        
+        //     var a = try{
+        //     Console.WriteLine("INFO: List employees request recieved.");
+        //         var employees = _context.Employees.ToList();
+        //         Console.WriteLine("INFO: Listed employees successfully.");
+
+
+        //     } except err{
+        //     Console.WriteLine("ERROR: Failed to list employees:{err.message}");
+        //     }
+
+        //     return Ok(
+        // } 
 
         [HttpGet("{id:int}")]   
         public Employee GetEmployeeDetails(int id)
