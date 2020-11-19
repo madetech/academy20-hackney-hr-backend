@@ -62,11 +62,9 @@ namespace Api
             services.AddCors(options => {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                 builder => {
-                    builder.WithOrigins("http://localhost:3000");
+                    builder.WithOrigins("http://localhost:3000, https://hackney-council-hr.herokuapp.com/");
                 });
             });
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
