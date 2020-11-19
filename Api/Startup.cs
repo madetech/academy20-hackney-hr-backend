@@ -33,7 +33,8 @@ namespace Api
             var server = Environment.GetEnvironmentVariable("DATABASE_URL");
             Console.WriteLine(server);
 
-            services.AddDbContext<DataContext>(options => {
+            services.AddDbContext<DataContext>(options =>
+            {
 
                 string connStr;
 
@@ -50,7 +51,7 @@ namespace Api
                 var pgPort = pgHostPort.Split(":")[1];
                 connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require; Trust Server Certificate=true;";
                 // connStr = $"Host={pgHost};Port={pgPort};Username={pgUser};Password={pgPass};Database={pgDb};sslmode=require;";
-                
+
                 var builder = new NpgsqlConnectionStringBuilder(connStr);
 
                 Console.WriteLine(connStr);
@@ -59,10 +60,13 @@ namespace Api
             });
 
             services.AddControllers();
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
-                builder => {
-                    builder.WithOrigins("http://localhost:3000", "https://hackney-council-hr.herokuapp.com");
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000",
+                    "https://hackney-council-hr.herokuapp.com").AllowAnyHeader().AllowAnyMethod();
                 });
             });
         }
