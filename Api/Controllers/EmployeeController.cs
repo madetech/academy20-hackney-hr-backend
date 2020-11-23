@@ -74,7 +74,7 @@ namespace Api.Controllers
         
         [EnableCors]
         [HttpGet("{id:int}")]   
-        public Employee GetEmployeeDetails(int id)
+        public async Task<ActionResult<Employee>> GetEmployeeDetails(int id)
         {
             var employees = _context.Employees.ToList();
             var result = employees.FirstOrDefault(e => e.id == id);
@@ -86,28 +86,21 @@ namespace Api.Controllers
         } 
 
         [HttpPut("{id:int}")]
-        public Employee UpdateEmployee(int id, Employee employee)
+        public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
         {
             var employees = _context.Employees.ToList();
+            Console.WriteLine(employees);
             var result = employees.FirstOrDefault(e => e.id == id);
+            try
+            {
+                if (id != employee.id)
+                    return BadRequest("Employee ID mismatch");
 
-            if (employee.first_name != null)
-            {
-                result.first_name = employee.first_name;
+                var employeeToUpdate = await GetEmployeeDetails(id);
+
             }
-            if (employee.last_name != null)
-            {
-                result.last_name = employee.last_name;
-            }
-            if (employee.job_title != null)
-            {
-                result.job_title = employee.job_title;
-            }
-            if (employee.contact_email != null)
-            {
-                result.contact_email = employee.contact_email;
-            }
-            return result;
+
+        
         }
 
         // [HttpPost]
