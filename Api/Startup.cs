@@ -35,9 +35,13 @@ namespace Api
 
             services.AddDbContext<DataContext>(options =>
             {
+                
+                // // for remote db
+                string connStr; 
+                // // for local db
+                // string connStr = "host=localhost; port=5432; user id=postgres; password=admin; database=postgres; pooling = true";
 
-                string connStr;
-
+                //remote db
                 var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
                 connUrl = connUrl.Replace("postgres://", string.Empty);
@@ -50,7 +54,6 @@ namespace Api
                 var pgHost = pgHostPort.Split(":")[0];
                 var pgPort = pgHostPort.Split(":")[1];
                 connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require; Trust Server Certificate=true;";
-                // connStr = $"Host={pgHost};Port={pgPort};Username={pgUser};Password={pgPass};Database={pgDb};sslmode=require;";
 
                 var builder = new NpgsqlConnectionStringBuilder(connStr);
 
