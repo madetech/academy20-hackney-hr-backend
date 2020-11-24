@@ -84,7 +84,8 @@ namespace Api.Controllers
             }  
             return result;
         } 
-
+        
+        [EnableCors]
         [HttpPut("{id:int}")]
         public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
         {
@@ -97,10 +98,15 @@ namespace Api.Controllers
                     return BadRequest("Employee ID mismatch");
 
                 var employeeToUpdate = await GetEmployeeDetails(id);
+                if (employeeToUpdate == null)
+                    return NotFound($"employee with ID = {id} not found");
 
+                return await UpdateEmployee(id, employee);
             }
-
-        
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error updating data");
+            } 
         }
 
         // [HttpPost]
