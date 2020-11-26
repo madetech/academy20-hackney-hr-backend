@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using System.Threading;
 using Microsoft.AspNetCore.Cors;
+using Api.Services;
+using System.IO;
 
 namespace Api.Controllers
 {
@@ -24,7 +26,7 @@ namespace Api.Controllers
 
         [EnableCors]
         [HttpGet]
-        public async Task<ActionResult> GetAllEmployees() //IEnumerable<Employee> ActionResult
+        public async Task<ActionResult> GetEmployees() //IEnumerable<Employee> ActionResult
         {   
             try {
                 
@@ -68,10 +70,10 @@ namespace Api.Controllers
         
         [EnableCors]
         [HttpGet("{id:int}")]   
-        public async Task<ActionResult<Employee>> GetEmployeeDetails(int id)
+        public async Task<ActionResult<Employee>> GetEmployeeById(int employeeId)
         {
             var employees = _context.Employees.ToList();
-            var result = employees.FirstOrDefault(e => e.id == id);
+            var result = employees.FirstOrDefault(e => e.id == employeeId);
             if (result == null)  
             {  
                 Response.StatusCode = 404;
@@ -81,7 +83,7 @@ namespace Api.Controllers
         
         [EnableCors]
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Employee>> UpdateEmployee(int id, Employee employee)
+        public async Task<ActionResult<Employee>> UpdateEmployeeById(int id, Employee employee)
         {
             var employees = _context.Employees.ToList();
             var result = employees.FirstOrDefault(e => e.id == id);
@@ -171,24 +173,27 @@ namespace Api.Controllers
             // } 
         }
 
-        // [HttpPost]
-        // public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
-        // {
-        //     try
-        //     {
-        //         if (employee == null)
-        //             return BadRequest();
 
-        //         var createdEmployee = await employeeRepository.AddEmployee(employee);
+        //NEW POST ENDPOINT NEEDS TO RECEIVE PASSWORD ALREADY HASHED
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        {
+            try
+            {
+                if (employee == null)
+                    return BadRequest();
 
-        //         return CreatedAtAction(nameof(GetEmployee),
-        //             new { id = createdEmployee.EmployeeId }, createdEmployee);
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return StatusCode(StatusCodes.Status500InternalServerError,
-        //             "Error creating new employee record");
-        //     }
-        // }      
+                var createdEmployee = await employeeRepository.AddEmployee(employee);
+
+                return CreatedAtAction(nameof(GetEmployees),
+                    new { id = createdEmployee.EmployeeId }, createdEmployee);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error creating new employee record");
+            }
+        }   
+
     }
 }

@@ -1,5 +1,3 @@
-using System;
-
 namespace Api.Models
 {
     public class Employee

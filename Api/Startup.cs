@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Api.Data;
+using Api.Models;
 using Npgsql;
 
 namespace Api
@@ -29,31 +30,28 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddDbContext<DataContext>(p=>p.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             var server = Environment.GetEnvironmentVariable("DATABASE_URL");
-            Console.WriteLine(server);
-
             services.AddDbContext<DataContext>(options =>
             {
-                
-                // // for remote db
-                string connStr; 
-                // // for local db
-                // string connStr = "host=localhost; port=5432; user id=postgres; password=admin; database=postgres; pooling = true";
+                // // for remote db Heroku
+                // string connStr; 
 
-                //remote db
-                var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+                // // for local db development
+                string connStr = "host=localhost; port=5432; user id=postgres; password=admin; database=postgres; pooling = true";
 
-                connUrl = connUrl.Replace("postgres://", string.Empty);
-                var pgUserPass = connUrl.Split("@")[0];
-                var pgHostPortDb = connUrl.Split("@")[1];
-                var pgHostPort = pgHostPortDb.Split("/")[0];
-                var pgDb = pgHostPortDb.Split("/")[1];
-                var pgUser = pgUserPass.Split(":")[0];
-                var pgPass = pgUserPass.Split(":")[1];
-                var pgHost = pgHostPort.Split(":")[0];
-                var pgPort = pgHostPort.Split(":")[1];
-                connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require; Trust Server Certificate=true;";
+                // // remote db Heroku
+                // var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+                // connUrl = connUrl.Replace("postgres://", string.Empty);
+                // var pgUserPass = connUrl.Split("@")[0];
+                // var pgHostPortDb = connUrl.Split("@")[1];
+                // var pgHostPort = pgHostPortDb.Split("/")[0];
+                // var pgDb = pgHostPortDb.Split("/")[1];
+                // var pgUser = pgUserPass.Split(":")[0];
+                // var pgPass = pgUserPass.Split(":")[1];
+                // var pgHost = pgHostPort.Split(":")[0];
+                // var pgPort = pgHostPort.Split(":")[1];
+                // connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL Mode=Require; Trust Server Certificate=true;";
 
                 var builder = new NpgsqlConnectionStringBuilder(connStr);
 
@@ -62,7 +60,10 @@ namespace Api
                 options.UseNpgsql(builder.ConnectionString);
             });
 
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
             services.AddControllers();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -72,6 +73,8 @@ namespace Api
                     "https://hackney-council-hr.herokuapp.com").AllowAnyHeader().AllowAnyMethod();
                 });
             });
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +91,7 @@ namespace Api
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
+            // app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

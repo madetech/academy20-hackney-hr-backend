@@ -1,8 +1,6 @@
-using System;
-
 namespace Api.Models
 {
-    public class UserLogin
+    public class EmployeeLogin
     {
         public int employee_id { get; set; }
         public string contact_email { get; set; }
