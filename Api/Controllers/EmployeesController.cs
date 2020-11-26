@@ -75,32 +75,54 @@ namespace Api.Controllers
                     "Error creating new employee record");
             }
         }
+    
+
+
+        [EnableCors]
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<EmployeeLogin>> UpdateEmployee(int id, Employee employee)
+        {
+            try
+            {
+                if (id != employee.id)
+                return BadRequest("Employee ID mismatch");
+
+                var employeeToUpdate = await employeeRepository.GetEmployeeById(id);
+
+                if (employeeToUpdate == null)
+                    return NotFound($"Employee with Id = {id} not found");
+
+                return await employeeRepository.UpdateEmployeeById(employee);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating data");
+            }
+
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        {
+            try 
+            {
+                var employeeToDelete = await employeeRepository.GetEmployeeById(id);
+                if (employeeToDelete == null)
+                {
+                    return NotFound($"Employee with Id = {id} not found");
+                }
+
+                return await employeeRepository.DeleteEmployee(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+        }
     }
 }
-
-//         [EnableCors]
-//         [HttpPut("{id:int}")]
-//         public async Task<ActionResult<EmployeeLogin>> UpdateEmployee(int id, EmployeeLogin employee)
-//         {
-//             try
-//             {
-//                 if (id != employee.id)
-//                 return BadRequest("Employee ID mismatch");
-
-//                 var employeeToUpdate = await employeeRespository.GetEmployee(id);
-
-//                 if (employeeToUpdate == null)
-//                     return DirectoryNotFoundException($"Employee with Id = {id} not found");
-
-//                 return await EmployeeRepository.UpdateEmployee(employee);
-//             }
-//             catch (Exception)
-//             {
-//                 return StatusCode(StatusCodes.Status500InternalServerError,
-//                     "Error updating data");
-//             }
-
-//         }
 
 
 
