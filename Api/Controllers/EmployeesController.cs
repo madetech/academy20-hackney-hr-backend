@@ -26,11 +26,11 @@ namespace Api.Controllers
 
         [EnableCors]
         [HttpGet]
-        public async Task<ActionResult> GetEmployees() 
+        public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees() 
         {   
             try 
             {
-                return Ok(await employeeRepository.GetEmployees());
+                return (await employeeRepository.GetEmployees()).ToList();
 
             } catch (Exception e) {
                 return StatusCode(StatusCodes.Status500InternalServerError,
@@ -44,62 +44,62 @@ namespace Api.Controllers
         {
             try
             {
-                var result = await employeeRepository.GetEmployees(id);
+                var result = await employeeRepository.GetEmployeeById(employeeId);
                 if (result == null) return NotFound();
                 return result;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error retrieving data from the database");
+                    $"Error retrieving data from the database: {e.Message}");
             }
         }    
     }
         
-        [EnableCors]
-        [HttpPost]
-        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
-        {
-            try
-            {
-                if (employee == null)
-                    return BadRequest();
+//         [EnableCors]
+//         [HttpPost]
+//         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+//         {
+//             try
+//             {
+//                 if (employee == null)
+//                     return BadRequest();
                 
-                var createdEmployee = await employeeRepository.AddEmployee(employee);
+//                 var createdEmployee = await employeeRepository.AddEmployee(employee);
 
-                return CreatedAtAction(nameof(GetEmployees),
-                    new { id = createdEmployee.id }, createdEmployee);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error creating new employee record");
-            }
-        }
+//                 return CreatedAtAction(nameof(GetEmployees),
+//                     new { id = createdEmployee.id }, createdEmployee);
+//             }
+//             catch (Exception)
+//             {
+//                 return StatusCode(StatusCodes.Status500InternalServerError,
+//                     "Error creating new employee record");
+//             }
+//         }
 
-        [EnableCors]
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult<EmployeeLogin>> UpdateEmployee(int id, EmployeeLogin employee)
-        {
-            try
-            {
-                if (id != employee.id)
-                return BadRequest("Employee ID mismatch");
+//         [EnableCors]
+//         [HttpPut("{id:int}")]
+//         public async Task<ActionResult<EmployeeLogin>> UpdateEmployee(int id, EmployeeLogin employee)
+//         {
+//             try
+//             {
+//                 if (id != employee.id)
+//                 return BadRequest("Employee ID mismatch");
 
-                var employeeToUpdate = await employeeRespository.GetEmployee(id);
+//                 var employeeToUpdate = await employeeRespository.GetEmployee(id);
 
-                if (employeeToUpdate == null)
-                    return DirectoryNotFoundException($"Employee with Id = {id} not found");
+//                 if (employeeToUpdate == null)
+//                     return DirectoryNotFoundException($"Employee with Id = {id} not found");
 
-                return await EmployeeRepository.UpdateEmployee(employee);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error updating data");
-            }
+//                 return await EmployeeRepository.UpdateEmployee(employee);
+//             }
+//             catch (Exception)
+//             {
+//                 return StatusCode(StatusCodes.Status500InternalServerError,
+//                     "Error updating data");
+//             }
 
-        }
+//         }
 }
 
 

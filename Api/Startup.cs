@@ -55,7 +55,6 @@ namespace Api
 
                 var builder = new NpgsqlConnectionStringBuilder(connStr);
 
-                Console.WriteLine(connStr);
                 Console.WriteLine(builder.ConnectionString);
                 options.UseNpgsql(builder.ConnectionString);
             });

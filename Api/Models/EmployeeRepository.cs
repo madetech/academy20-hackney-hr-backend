@@ -16,7 +16,7 @@ namespace Api.Models
         }
 
         public async Task<IEnumerable<Employee>> GetEmployees()
-        {
+        {   
             return await appDbContext.Employees.ToListAsync();
         }
         public async Task<Employee> GetEmployeeById(int employeeId)
