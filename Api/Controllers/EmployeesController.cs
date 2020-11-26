@@ -54,28 +54,29 @@ namespace Api.Controllers
                     $"Error retrieving data from the database: {e.Message}");
             }
         }    
-    }
         
-//         [EnableCors]
-//         [HttpPost]
-//         public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
-//         {
-//             try
-//             {
-//                 if (employee == null)
-//                     return BadRequest();
+        [EnableCors]
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
+        {
+            try
+            {
+                if (employee == null)
+                    return BadRequest();
                 
-//                 var createdEmployee = await employeeRepository.AddEmployee(employee);
+                var createdEmployee = await employeeRepository.AddEmployee(employee);
 
-//                 return CreatedAtAction(nameof(GetEmployees),
-//                     new { id = createdEmployee.id }, createdEmployee);
-//             }
-//             catch (Exception)
-//             {
-//                 return StatusCode(StatusCodes.Status500InternalServerError,
-//                     "Error creating new employee record");
-//             }
-//         }
+                return CreatedAtAction(nameof(GetEmployees),
+                    new { id = createdEmployee.id }, createdEmployee);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error creating new employee record");
+            }
+        }
+    }
+}
 
 //         [EnableCors]
 //         [HttpPut("{id:int}")]
@@ -100,7 +101,7 @@ namespace Api.Controllers
 //             }
 
 //         }
-}
+
 
 
 
