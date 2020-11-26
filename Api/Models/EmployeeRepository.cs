@@ -8,9 +8,9 @@ namespace Api.Models
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly DataContext appDbContext;
+        private readonly AppDbContext appDbContext;
 
-        public EmployeeRepository(DataContext appDbContext)
+        public EmployeeRepository(AppDbContext appDbContext)
         {
             this.appDbContext = appDbContext;
         }
@@ -19,7 +19,7 @@ namespace Api.Models
         {
             return await appDbContext.Employees.ToListAsync();
         }
-        public async Task<IEnumerable<Employee>> GetEmployeeById(int employeeId)
+        public async Task<Employee> GetEmployeeById(int employeeId)
         {
             return await appDbContext.Employees.FirstOrDefaultAsync(e => e.id == employeeId);
         }
@@ -35,7 +35,7 @@ namespace Api.Models
 
             if (result != null)
             {
-                result = result; //update whole object or each property?
+                result = employee; //update whole object or each property?
 
                 await appDbContext.SaveChangesAsync();
 

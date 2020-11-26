@@ -31,7 +31,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             var server = Environment.GetEnvironmentVariable("DATABASE_URL");
-            services.AddDbContext<DataContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
             {
                 // // for remote db Heroku
                 // string connStr; 

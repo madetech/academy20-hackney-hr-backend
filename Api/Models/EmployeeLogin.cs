@@ -2,7 +2,7 @@ namespace Api.Models
 {
     public class EmployeeLogin
     {
-        public int employee_id { get; set; }
+        public int id { get; set; }
         public string contact_email { get; set; }
         public string password { get; set; }
         public bool manager { get; set; }
