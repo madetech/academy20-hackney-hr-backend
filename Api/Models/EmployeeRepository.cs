@@ -34,8 +34,23 @@ namespace Api.Models
             var result = await appDbContext.Employees.FirstOrDefaultAsync(e => e.id == employee.id);
 
             if (result != null)
-            {
-                result = employee; //update whole object or each property?
+           {
+                result.first_name = employee.first_name;
+                result.last_name = employee.last_name;
+                result.job_title = employee.job_title;
+                result.contact_email = employee.contact_email;
+                result.contact_number = employee.contact_number;
+                result.salary_band  = employee.salary_band;
+                result.home_address_line_1 = employee.home_address_line_1;
+                result.home_address_line_2 = employee.home_address_line_2;
+                result.home_address_city = employee.home_address_city;
+                result.home_address_postcode = employee.home_address_postcode;
+                result.office_location = employee.office_location;
+                result.manager = employee.manager;
+                result.reportees = employee.reportees;
+                result.next_of_kin_first_name = employee.next_of_kin_first_name;
+                result.next_of_kin_last_name = employee.next_of_kin_last_name;
+                result.next_of_kin_contact_number = employee.next_of_kin_contact_number;
 
                 await appDbContext.SaveChangesAsync();
 
