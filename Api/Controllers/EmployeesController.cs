@@ -58,7 +58,7 @@ namespace Api.Controllers
         
         [EnableCors]
         [HttpPost]
-        public async Task<ActionResult<Employee>> CreateEmployee([FromBody]Employee employee)
+        public async Task<ActionResult<Employee>> CreateEmployee(Employee employee)
         {
             try
             {
@@ -76,7 +76,31 @@ namespace Api.Controllers
                     "Error creating new employee record");
             }
         }
-    }
+
+        [EnableCors]
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult<EmployeeLogin>> UpdateEmployee(int id, EmployeeLogin employee)
+        {
+            try
+            {
+                if (id != employee.id)
+                return BadRequest("Employee ID mismatch");
+
+                var employeeToUpdate = await employeeRespository.GetEmployee(id);
+
+                if (employeeToUpdate == null)
+                    return DirectoryNotFoundException($"Employee with Id = {id} not found");
+
+                return await EmployeeRepository.UpdateEmployee(employee);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error updating data");
+            }
+
+        }
+}
 
 
 
