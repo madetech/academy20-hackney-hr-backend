@@ -38,23 +38,50 @@ namespace Api.Controllers
             }
         }
         
-        // [EnableCors]
-        // [HttpGet("{id:int}")]   
-        // public async Task<ActionResult<Employee>> GetEmployeeById(int employeeId)
-        // {
-        //     var employees = _context.Employees.ToList();
-        //     var result = employees.FirstOrDefault(e => e.id == employeeId);
-        //     if (result == null)  
-        //     {  
-        //         Response.StatusCode = 404;
-        //     }  
-        //     return result;
-        // } 
+        [EnableCors]
+        [HttpGet("{id:int}")]   
+        public async Task<ActionResult<Employee>> GetEmployeeById(int employeeId)
+        {
+            try
+            {
+                var result = await employeeRepository.GetEmployees(id);
+                if (result == null) return NotFound();
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }    
+    }
         
-        // [EnableCors]
-        // [HttpPut("{id:int}")]
-        // public async Task<ActionResult<Employee>> UpdateEmployeeById(int id, Employee employee)
-        // {
+        [EnableCors]
+        [HttpPost]
+        public async Task<ActionResult<Employee>> CreateEmployee([FromBody]Employee employee)
+        {
+            try
+            {
+                if (employee == null)
+                    return BadRequest();
+                
+                var createdEmployee = await employeeRepository.AddEmployee(employee);
+
+                return CreatedAtAction(nameof(GetEmployees),
+                    new { id = createdEmployee.id }, createdEmployee);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error creating new employee record");
+            }
+        }
+    }
+
+
+
+            
+        
         //     var employees = _context.Employees.ToList();
         //     var result = employees.FirstOrDefault(e => e.id == id);
         //     if (employee.first_name != null)
@@ -164,6 +191,3 @@ namespace Api.Controllers
         //             "Error creating new employee record");
         //     }
         // }   
-
-    }
-}
