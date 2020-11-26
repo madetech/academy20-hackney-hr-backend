@@ -39,7 +39,7 @@ namespace Api.Controllers
         }
         
         [EnableCors]
-        [HttpGet("{id:int}")]   
+        [HttpGet("{employeeId:int}")]   
         public async Task<ActionResult<Employee>> GetEmployeeById(int employeeId)
         {
             try
