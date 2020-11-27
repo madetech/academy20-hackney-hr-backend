@@ -84,6 +84,7 @@ namespace Api.Controllers
         {
             try
             {
+                Console.WriteLine(id);
                 if (id != employee.id)
                 return BadRequest("Employee ID mismatch");
 
@@ -102,25 +103,25 @@ namespace Api.Controllers
 
         }
 
-        // [HttpDelete("{id:int}")]
-        // public async Task<ActionResult<Employee>> DeleteEmployee(int id)
-        // {
-        //     try 
-        //     {
-        //         var employeeToDelete = await employeeRepository.GetEmployeeById(id);
-        //         if (employeeToDelete == null)
-        //         {
-        //             return NotFound($"Employee with Id = {id} not found");
-        //         }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Employee>> DeleteEmployee(int id)
+        {
+            try 
+            {
+                var employeeToDelete = await employeeRepository.GetEmployeeById(id);
+                if (employeeToDelete == null)
+                {
+                    return NotFound($"Employee with Id = {id} not found");
+                }
 
-        //         return await employeeRepository.DeleteEmployee(id);
-        //     }
-        //     catch (Exception)
-        //     {
-        //         return StatusCode(StatusCodes.Status500InternalServerError,
-        //             "Error deleting data");
-        //     }
-        // }
+                return await employeeRepository.DeleteEmployee(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+        }
     }
 }
 
